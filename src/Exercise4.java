@@ -58,18 +58,42 @@ public class Exercise4 {
 
     public void loadRecommendationGraph(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+
             String line;
+
             while ((line = reader.readLine()) != null) {
                 String[] tempData = line.split(";");
-                Person p = new Person(tempData[0]);
+
+                if(!graph.getNodes().contains(tempData[0])){
+                    Person p = new Person(tempData[0]);
+                    graph.add(p);
+                }
+
                 Record r = new Record(tempData[1], tempData[2]);
 
-                graph.add(p);
-                graph.add(r);
-                graph.connect(p,r, "", 0);
+                for (Node n : graph.getNodes()) {
+                    if (n instanceof Person) {
+                        if (n.getName().equals(tempData[0])) {
+                            for (Node o : graph.getNodes()) {
+                                if (o instanceof Record) {
+                                    if (o.getName().equals(tempData[1])
+                                            && ((Record) o).getArtist().equals(tempData[2])) {
+                                        graph.connect(n, r, "", 0);
+                                        Person p = saödlaösld,
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //Person p = graph.get
+
+
+                //graph.add(r);
+                //graph.connect(p ,r, "", 0);
             }
 
-            System.out.println(graph); // KOMMENTAR ATT TA BOORT
+            System.out.println(graph.getNodes()); // KOMMENTAR ATT TA BOORT
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
