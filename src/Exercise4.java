@@ -22,7 +22,7 @@ public class Exercise4 {
                     locations.put(cityName, location);
                 }
             }
-            //System.out.println(locations);
+
             while ((line = reader.readLine()) != null) {
                 String [] edge = line.split(";");
                 Location from = locations.get(edge[0]);
@@ -40,7 +40,6 @@ public class Exercise4 {
             e.printStackTrace();
         }
 
-        //System.out.println(graph);
     }
 
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
