@@ -43,7 +43,7 @@ public class Exercise4 {
     }
 
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
-        SortedMap<Integer, SortedSet<Record>> alsoLiked = new TreeMap<>();
+        /*SortedMap<Integer, SortedSet<Record>> alsoLiked = new TreeMap<>();
         Set<Edge> edges = new HashSet<>();
         edges.addAll(graph.getEdgesFrom(item));
         Set<Person> owners = new HashSet<>();
@@ -70,7 +70,7 @@ public class Exercise4 {
 
         }
         // Hämtar andra records från varje ägare.
-        System.out.println(alsoLiked);
+        System.out.println(alsoLiked); */
         return null;
     }
 
@@ -94,12 +94,9 @@ public class Exercise4 {
                 topFive.get(popularity).add((Record) node);
             }
        }
-       if (topFive.size() < 5){
-           topFive = topFive.headMap(topFive.size());
-       } else {
-           topFive = topFive.headMap(5);
-       }
-
+        while (topFive.size() > 5) {
+            topFive.pollLastEntry();
+        }
        return topFive;
     }
 
