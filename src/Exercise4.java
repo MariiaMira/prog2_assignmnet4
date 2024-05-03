@@ -43,17 +43,34 @@ public class Exercise4 {
     }
 
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
+        SortedMap<Integer, SortedSet<Record>> alsoLiked = new TreeMap<>();
         Set<Edge> edges = new HashSet<>();
         edges.addAll(graph.getEdgesFrom(item));
         Set<Person> owners = new HashSet<>();
-        owners.addAll(edges.forEach(edge -> edge.getDestination());)
+        edges.forEach(edge->{
+            if(!edge.getDestination().equals(item)){
+                owners.add((Person)edge.getDestination());
+            }
+        });
+        System.out.println(owners);
 
-        System.out.println(edges);
+        for(Person p: owners){
+            Collection<Edge<Node>> edge = graph.getEdgesFrom(p);
+            for(Edge e : edge){
+                //Record r = (Record) e.getDestination();
+                if(!item.equals(e.getDestination())){
+                    int popularity = getPopularity(e.getDestination());
+                    if(!alsoLiked.containsKey(popularity)){
+                        SortedSet<Record> sortedSet = new TreeSet<>();
+                        alsoLiked.put(popularity, sortedSet);
+                    }
+                    alsoLiked.get(popularity).add(e.getDestination());
+                }
+            }
 
-        // Hämtar ägare från edge
-
+        }
         // Hämtar andra records från varje ägare.
-
+        System.out.println(alsoLiked);
         return null;
     }
 
