@@ -69,11 +69,7 @@ public class Exercise4 {
                 topFive.get(popularity).add((Record) node);
             }
        }
-
        topFive = topFive.headMap(5);
-
-       System.out.println(topFive);
-
        return topFive;
     }
 
