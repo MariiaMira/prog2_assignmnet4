@@ -45,15 +45,33 @@ public class Exercise4 {
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
 
 
+
         return null;
     }
 
     public int getPopularity(Record item) {
-       return -1;
+       Collection<Edge<Node>> numberEdges = graph.getEdgesFrom(item);
+       return numberEdges.size();
     }
 
     public SortedMap<Integer, Set<Record>> getTop5() {
-       return null;
+
+       SortedMap<Integer, Set<Record>> topFive = new TreeMap<>(Collections.reverseOrder());
+
+       for (Node node : graph.getNodes()){
+            if (node instanceof Record){
+                int popularity = getPopularity((Record) node);
+                if (!topFive.containsKey(popularity)){
+
+                    topFive.put(popularity, new HashSet<>());
+
+                }
+                topFive.get(popularity).add((Record) node);
+            }
+       }
+
+
+       return topFive;
     }
 
     public void loadRecommendationGraph(String fileName) {
