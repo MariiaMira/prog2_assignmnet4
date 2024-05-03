@@ -42,9 +42,10 @@ public class Edge <T> implements Serializable {
     public int hashCode() {
         return Objects.hash(destination, name, weight);
     }
+
     @Override
-    public String toString() {
-        return "till " + destination + " med " + name + " tar " + weight;
+    public String toString() { // ändrat lite - bör kanske ändras till engelska //R
+        return "\nKoppling till: %s, resväg via: %s (vikt: %d)".formatted(destination, name, weight);
     }
 
 }

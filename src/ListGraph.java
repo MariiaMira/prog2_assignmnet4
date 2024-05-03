@@ -201,12 +201,20 @@ public class ListGraph <T> implements Graph<T>, Serializable {
         return path;
     }
 
+    @Override
     public String toString(){
         StringBuilder builder = new StringBuilder();
         for(Map.Entry<T, Set<Edge<T>>> l: locations.entrySet()){
+            builder.append("\n\n"); // la till för att skapa lite struktur
             builder.append(l.getKey());
+
             for(Edge<T> edge : l.getValue()){
-                builder.append(edge.toString());
+                if (!edge.getName().isEmpty()) { // la till för att skippa onödig utskrift på Person/Record
+                    builder.append(edge.toString());
+                } else {
+                    builder.append("\n Edge: ");
+                    builder.append(edge.getDestination());
+                }
             }
         }
         return builder.toString();

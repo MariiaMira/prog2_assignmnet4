@@ -31,8 +31,8 @@ public class Exercise4 {
                 int weight = Integer.parseInt(edge[3]);
 
                 graph.connect(from, to, medium, weight);
-
             }
+            System.out.println(graph.toString()); // utskrift
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -57,43 +57,33 @@ public class Exercise4 {
     }
 
     public void loadRecommendationGraph(String fileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        Map<String, Person> personMap = new HashMap<>(); // hittar personer på Namn
+        Set<Record> recordSet = new HashSet<>(); // hittar records på equals eller hashCode
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
 
             while ((line = reader.readLine()) != null) {
                 String[] tempData = line.split(";");
 
-                if(!graph.getNodes().contains(tempData[0])){
-                    Person p = new Person(tempData[0]);
-                    graph.add(p);
+                String personName = tempData[0].trim();
+                String recordTitle = tempData[1].trim();
+                String recordArtist = tempData[2].trim();
+
+                Person person = personMap.get(personName); // hämtar person eller blir NULL
+                if (person == null) { // om NULL
+                    person = new Person(personName);
+                    graph.add(person);
+                    personMap.put(personName, person);
                 }
 
-                Record r = new Record(tempData[1], tempData[2]);
-
-                for (Node n : graph.getNodes()) {
-                    if (n instanceof Person) {
-                        if (n.getName().equals(tempData[0])) {
-                            for (Node o : graph.getNodes()) {
-                                if (o instanceof Record) {
-                                    if (o.getName().equals(tempData[1])
-                                            && ((Record) o).getArtist().equals(tempData[2])) {
-                                        graph.connect(n, r, "", 0);
-                                        Person p = saödlaösld,
-                                    }
-                                }
-                            }
-                        }
-                    }
+                Record record = new Record(recordTitle, recordArtist);
+                if (recordSet.add(record)) { // add() -> boolean true om den inte finns redan
+                    graph.add(record);
                 }
-                //Person p = graph.get
-
-
-                //graph.add(r);
-                //graph.connect(p ,r, "", 0);
+                graph.connect(person, record, "", 0); // final - lägg till en connection
             }
-
-            System.out.println(graph.getNodes()); // KOMMENTAR ATT TA BOORT
+            System.out.println(graph.toString()); // utskrift
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -101,5 +91,4 @@ public class Exercise4 {
             e.printStackTrace();
         }
     }
-
 }

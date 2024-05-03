@@ -35,6 +35,6 @@ public class Record implements Node{
 
     @Override
     public String toString(){
-        return name + " (" + artist +")";
+        return "Record: " + name + " (" + artist +")";
     }
 }
