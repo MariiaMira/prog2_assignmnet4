@@ -32,7 +32,7 @@ public class Exercise4 {
 
                 graph.connect(from, to, medium, weight);
             }
-            System.out.println(graph.toString()); // utskrift
+            //System.out.println(graph.toString()); // utskrift
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,6 +70,9 @@ public class Exercise4 {
             }
        }
 
+       topFive = topFive.headMap(5);
+
+       System.out.println(topFive);
 
        return topFive;
     }
@@ -101,7 +104,7 @@ public class Exercise4 {
                 }
                 graph.connect(person, record, "", 0); // final - lägg till en connection
             }
-            System.out.println(graph.toString()); // utskrift
+            //System.out.println(graph.toString()); // utskrift
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
