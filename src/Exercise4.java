@@ -69,7 +69,12 @@ public class Exercise4 {
                 topFive.get(popularity).add((Record) node);
             }
        }
-       topFive = topFive.headMap(5);
+       if (topFive.size() < 5){
+           topFive = topFive.headMap(topFive.size());
+       } else {
+           topFive = topFive.headMap(5);
+       }
+
        return topFive;
     }
 
