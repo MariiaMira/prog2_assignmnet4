@@ -43,35 +43,24 @@ public class Exercise4 {
     }
 
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
-        /*SortedMap<Integer, SortedSet<Record>> alsoLiked = new TreeMap<>();
-        Set<Edge> edges = new HashSet<>();
-        edges.addAll(graph.getEdgesFrom(item));
-        Set<Person> owners = new HashSet<>();
-        edges.forEach(edge->{
-            if(!edge.getDestination().equals(item)){
-                owners.add((Person)edge.getDestination());
-            }
-        });
-        System.out.println(owners);
+        SortedMap<Integer, SortedSet<Record>> alsoLiked = new TreeMap<>(Comparator.reverseOrder());
+        for(Edge<Node> edge1 : graph.getEdgesFrom(item)){
+            Node person = edge1.getDestination();
+            for(Edge<Node> edge2 : graph.getEdgesFrom(person)){
+                Record record = (Record) edge2.getDestination();
+                int popularity = getPopularity(record);
+                SortedSet<Record> set = alsoLiked.get(popularity);
+                if(set == null){
+                    set = new TreeSet<>(Comparator.comparing(Record::toString));
+                    //comparing tar fram vad som ska jämföras
+                    alsoLiked.put(popularity, set);
+                } // for if
+                set.add(record);
 
-        for(Person p: owners){
-            Collection<Edge<Node>> edge = graph.getEdgesFrom(p);
-            for(Edge e : edge){
-                //Record r = (Record) e.getDestination();
-                if(!item.equals(e.getDestination())){
-                    int popularity = getPopularity(e.getDestination());
-                    if(!alsoLiked.containsKey(popularity)){
-                        SortedSet<Record> sortedSet = new TreeSet<>();
-                        alsoLiked.put(popularity, sortedSet);
-                    }
-                    alsoLiked.get(popularity).add(e.getDestination());
-                }
-            }
+            } //for edge2
+        } // for edg1
 
-        }
-        // Hämtar andra records från varje ägare.
-        System.out.println(alsoLiked); */
-        return null;
+        return alsoLiked;
     }
 
     public int getPopularity(Record item) {
