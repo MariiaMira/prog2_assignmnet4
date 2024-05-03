@@ -4,7 +4,8 @@ public class Ex4Test {
         //test.loadLocationGraph("ex4location.graph");
 
         test.loadRecommendationGraph("ex4reco.graph");
-        test.getTop5();
+        test.getAlsoLiked(new Record("Destroyer", "KISS"));
+
 
     }
 }

@@ -43,8 +43,16 @@ public class Exercise4 {
     }
 
     public SortedMap<Integer, SortedSet<Record>> getAlsoLiked(Record item) {
+        Set<Edge> edges = new HashSet<>();
+        edges.addAll(graph.getEdgesFrom(item));
+        Set<Person> owners = new HashSet<>();
+        owners.addAll(edges.forEach(edge -> edge.getDestination());)
 
+        System.out.println(edges);
 
+        // Hämtar ägare från edge
+
+        // Hämtar andra records från varje ägare.
 
         return null;
     }
